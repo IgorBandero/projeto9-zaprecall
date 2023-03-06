@@ -155,7 +155,7 @@ export default function Card (props){
 
     function resultAnswer(answer){
 
-        
+
 
         if (answer === "wrong"){
             setImage(wrongImage);

@@ -5,7 +5,7 @@ import rightImage from "../assets/icone_certo.png";
 
 const Container = styled.div`
     width: 375px;
-    height: 70px;
+    min-height: 70px;
     position: fixed;
     bottom: 0;
     background-color: white;
@@ -27,19 +27,54 @@ const Container = styled.div`
     }
 
     .results img {
-        margin-right: 5px;
+        margin: 0 10px 15px 0;
+    }
+
+    .total {
+        margin-top: 15px;
+        margin-bottom: 10px;
     }
 `
+
+const Message = styled.div`
+    margin-top: 10px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 10px 0 10px;
+    display: ${props => props.finalDisplay} !important;
+
+    div {
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        margin-right: 10px;
+    }
+` 
 
 export default function Footer (props){
     return (
         <Container data-test="footer">
-            <p> {props.done} / {props.total} CONCLUÍDOS </p>
+
+            <Message data-test="finish-text" finalDisplay={props.finalDisplay} >
+                <div>
+                    <img src={props.result.image} />
+                    <p> {props.result.title} </p>
+                </div>
+                <div>
+                    <p> {props.result.text} </p>
+                </div>
+            </ Message>
+
+            <p className="total" > {props.done} / {props.total} CONCLUÍDOS </p>
             <div className="results" > 
                 {props.resultsList.map((element, index) => {
-                    return (<img key={index} src={element.image} />);
+                    return (<img data-test={element.data} key={index} src={element.image} />);
                 })}  
-            </div>            
+            </div>        
+                
         </Container>
     );
 }
