@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import {useState} from "react";
 import seta from "../assets/seta_play.png";
 import turn from "../assets/seta_virar.png";
 import wrongImage from "../assets/icone_erro.png";
@@ -41,7 +41,7 @@ const ClosedCard = styled.div`
     }
 
     img {
-        width: 20px;
+        width: 23px;
         height: 23px;  
     }
 `
@@ -125,6 +125,7 @@ export default function Card (props){
     const [openCardVisibility, setOpenCardVisibility] = useState("none");
     const [turnedCardVisibility, setTurnedCardVisibility] = useState("none");
     const [image, setImage] = useState(seta);
+    const [buttonDataTest, setButtonDataTest] = useState("play-btn");
 
 
     function openCard(){
@@ -143,14 +144,17 @@ export default function Card (props){
         if (answer === "wrong"){
             setImage(wrongImage);
             setStatusQuestion({color: "#FF3030", decoration: "line-through"});
+            setButtonDataTest("no-icon");
         }
         else if (answer === "almost"){
             setImage(almostImage);
             setStatusQuestion({color: "#FF922E", decoration: "line-through"});
+            setButtonDataTest("partial-icon");
         }
         else if (answer === "right"){
             setImage(rightImage);
             setStatusQuestion({color: "#2FBE34", decoration: "line-through"});
+            setButtonDataTest("zap-icon");
         }
         setTypeCard({name: "initial", height: "65px", background: "#FFFFFF"});
         setTurnedCardVisibility("none");
@@ -164,7 +168,7 @@ export default function Card (props){
 
             <ClosedCard visibility = {closedCardVisibility} type = {statusQuestion}>
                 <p data-test="flashcard-text"> Pergunta {props.number} </p>     
-                <img data-test="play-btn" onClick={openCard} src={image} /> 
+                <img data-test={buttonDataTest} onClick={openCard} src={image} /> 
             </ClosedCard>
 
             <OpendCard visibility= {openCardVisibility}>
@@ -186,8 +190,6 @@ export default function Card (props){
                     <button data-test="zap-btn" className="right" onClick={() => resultAnswer("right")} > Zap! </button>
                 </div>
             </TurnedCard>   
-
-        </Flashcard>
-        
+        </Flashcard>        
     );
 };

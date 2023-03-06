@@ -20,10 +20,10 @@ const Container = styled.div`
     }
 `
 
-export default function Footer (){
+export default function Footer (props){
     return (
         <Container data-test="footer">
-            <p> 0/4 CONCLUÍDOS </p>
+            <p> {props.done} / {props.total} CONCLUÍDOS </p>
         </Container>
     );
 }

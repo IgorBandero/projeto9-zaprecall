@@ -1,5 +1,7 @@
+import {useState} from "react";
 import styled from "styled-components";
 import Card from "./Card";
+import Footer from "./Footer";
 
 const cards = [
     {question: "O que é JSX?", answer: "Uma extensão da linguagem JavaScript" },
@@ -22,15 +24,25 @@ const Container = styled.div`
     overflow: scroll;
 `;
 
+
 export default function CardSet(props){   
 
-    return (
-        <Container> 
+    const [numAnswered, setNumAnswered] = useState(0);
 
-            {cards.map((element, index) => {
-                return (<Card key={index} number={index} question={element.question} answer={element.answer} />);
-            })}
-                
-        </Container>             
+    function addAnswered(){
+        let total = numAnswered;
+        setNumAnswered(total + 1);
+    }
+
+    return (
+        <>
+            <Container> 
+                {cards.map((element, index) => {
+                    return (<Card key={index} number={index} question={element.question} answer={element.answer} funcAddAnswered = {addAnswered} />);
+                })}    
+            </Container>        
+            <Footer done={numAnswered} total={cards.length}/>         
+        </>
+         
     )
 }

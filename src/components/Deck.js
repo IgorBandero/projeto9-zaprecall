@@ -19,8 +19,7 @@ export default function Deck (props){
         return (
         <Container status = {props.visibility}>        
             <Logo />
-            <CardSet />
-            <Footer />                      
+            <CardSet />                   
         </Container>
     );
 }
