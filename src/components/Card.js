@@ -93,7 +93,7 @@ const TurnedCard = styled.div`
     border-radius: 5px;
 
     .answer p {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 400;
         line-height: 22px;
     }
@@ -142,7 +142,7 @@ export default function Card (props){
 
 
     function openCard(){
-        setTypeCard({name: "question", height: "130px", background: "#FFFFD4"});
+        setTypeCard({name: "question", height: "150px", background: "#FFFFD4"});
         setImage(turn);
         setClosedCardVisibility("none");
         setOpenCardVisibility("flex");
@@ -154,6 +154,7 @@ export default function Card (props){
     }
 
     function resultAnswer(answer){
+
         if (answer === "wrong"){
             setImage(wrongImage);
             setStatusQuestion({color: "#FF3030", decoration: "line-through"});
@@ -172,6 +173,7 @@ export default function Card (props){
         setTypeCard({name: "initial", height: "65px", background: "#FFFFFF"});
         setTurnedCardVisibility("none");
         setClosedCardVisibility("flex");
+        props.funcAddAnswered();
     }
 
 
