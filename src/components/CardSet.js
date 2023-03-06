@@ -62,7 +62,7 @@ export default function CardSet(props){
     }
 
     return (
-        <>
+        <> 
             <Container> 
                 {cards.map((element, index) => {
                     return (<Card key={index} number={index} question={element.question} answer={element.answer} funcAddAnswered = {addAnswered} />);

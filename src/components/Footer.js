@@ -50,6 +50,8 @@ const Message = styled.div`
     }
 
     img {
+        width: 23px;
+        height: 23px;
         margin-right: 10px;
     }
 ` 
