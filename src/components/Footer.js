@@ -22,8 +22,8 @@ const Container = styled.div`
 
 export default function Footer (props){
     return (
-        <Container data-test="footer">
-            <p> {props.done} / {props.total} CONCLUÍDOS </p>
+        <Container>
+            <p data-test="footer"> {props.done} / {props.total} </p> <p> CONCLUÍDOS </p>
         </Container>
     );
 }
