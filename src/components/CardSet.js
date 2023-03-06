@@ -16,7 +16,7 @@ const cards = [
 
 const Container = styled.div`
     height: 100vh;
-    margin: 45px auto 70px auto;
+    margin: 150px auto 70px auto;
     display: flex;
     flex-direction: column;
     align-items: center;

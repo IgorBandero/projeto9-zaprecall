@@ -18,8 +18,9 @@ const Flashcard = styled.div`
     box-sizing: border-box;
     font-family: 'Recursive'; 
 
-    img {
-        cursor: pointer;
+    button {
+        border: none;  
+        background: none;
     }
 
 `
@@ -38,6 +39,13 @@ const ClosedCard = styled.div`
         line-height: 19px;
         color: ${props => props.type.color};
         text-decoration-line: ${props => props.type.decoration};
+    }
+
+    button {
+        width: 30px;
+        height: 30px;
+        background-image: url("../assets/seta_play.png");
+        cursor: pointer;
     }
 
     img {
@@ -69,6 +77,10 @@ const OpendCard = styled.div`
         width: 100%;
         display: flex;
         justify-content: end;
+    }
+
+    img {
+        cursor: pointer;
     }
 `
 
@@ -126,6 +138,7 @@ export default function Card (props){
     const [turnedCardVisibility, setTurnedCardVisibility] = useState("none");
     const [image, setImage] = useState(seta);
     const [buttonDataTest, setButtonDataTest] = useState("play-btn");
+    const [statusButton, setStatusButton] = useState(false);
 
 
     function openCard(){
@@ -167,8 +180,10 @@ export default function Card (props){
         <Flashcard data-test="flashcard" type = {typeCard}> 
 
             <ClosedCard visibility = {closedCardVisibility} type = {statusQuestion}>
-                <p data-test="flashcard-text"> Pergunta {props.number} </p>     
-                <img data-test={buttonDataTest} onClick={openCard} src={image} /> 
+                <p data-test="flashcard-text"> Pergunta {props.number + 1} </p>   
+                <button data-test={buttonDataTest} disabled={statusButton}  onClick={openCard}> 
+                    <img src={image} />
+                </button>                  
             </ClosedCard>
 
             <OpendCard visibility= {openCardVisibility}>
@@ -185,9 +200,9 @@ export default function Card (props){
                     <p data-test="flashcard-text"> {props.answer} </p>
                 </div>
                 <div className="buttons">
-                    <button data-test="no-btn" className="wrong" onClick={() => resultAnswer("wrong")} > Não lembrei </button>
-                    <button data-test="partial-btn" className="almost" onClick={() => resultAnswer("almost")} > Quase não lembrei </button>
-                    <button data-test="zap-btn" className="right" onClick={() => resultAnswer("right")} > Zap! </button>
+                    <button data-test="no-btn" className="wrong" onClick={() => {setStatusButton(true); resultAnswer("wrong");}} > Não lembrei </button>
+                    <button data-test="partial-btn" className="almost" onClick={() => {setStatusButton(true); resultAnswer("almost");}} > Quase não lembrei </button>
+                    <button data-test="zap-btn" className="right" onClick={() => {setStatusButton(true); resultAnswer("right");}} > Zap! </button>
                 </div>
             </TurnedCard>   
         </Flashcard>        
