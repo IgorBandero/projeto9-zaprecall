@@ -155,6 +155,8 @@ export default function Card (props){
 
     function resultAnswer(answer){
 
+        
+
         if (answer === "wrong"){
             setImage(wrongImage);
             setStatusQuestion({color: "#FF3030", decoration: "line-through"});
@@ -173,7 +175,7 @@ export default function Card (props){
         setTypeCard({name: "initial", height: "65px", background: "#FFFFFF"});
         setTurnedCardVisibility("none");
         setClosedCardVisibility("flex");
-        props.funcAddAnswered();
+        props.funcAddAnswered(answer);
     }
 
 

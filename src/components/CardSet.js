@@ -2,6 +2,9 @@ import {useState} from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import Footer from "./Footer";
+import wrongImage from "../assets/icone_erro.png";
+import almostImage from "../assets/icone_quase.png";
+import rightImage from "../assets/icone_certo.png";
 
 const cards = [
     {question: "O que é JSX?", answer: "Uma extensão da linguagem JavaScript" },
@@ -28,10 +31,24 @@ const Container = styled.div`
 export default function CardSet(props){   
 
     const [numAnswered, setNumAnswered] = useState(0);
+    const [listResults, setListResults] = useState([]);
 
-    function addAnswered(){
+    function addAnswered(result){
         let total = numAnswered;
+        let list = listResults;
         setNumAnswered(total + 1);
+        if (result === "wrong"){
+            list.push({image: wrongImage});
+            setListResults(list);
+        }
+        else if (result === "almost"){
+            list.push({image: almostImage});
+            setListResults(list);
+        }
+        else if (result === "right"){
+            list.push({image: rightImage});
+            setListResults(list);
+        }
     }
 
     return (
@@ -41,7 +58,7 @@ export default function CardSet(props){
                     return (<Card key={index} number={index} question={element.question} answer={element.answer} funcAddAnswered = {addAnswered} />);
                 })}    
             </Container>        
-            <Footer done={numAnswered} total={cards.length}/>         
+            <Footer done={numAnswered} total={cards.length} resultsList={listResults} />         
         </>
          
     )
